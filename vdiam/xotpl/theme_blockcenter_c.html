@@ -1,0 +1,7 @@
+<{if $block.title == ""}>
+<{if $block.title}><div class="xo-blocktitle2"><{$block.title}></div><{/if}>
+<div class="xo-blockcontent2"><{$block.content}></div>
+<{else}>
+<{if $block.title}><div class="xo-blocktitle"><{$block.title}></div><{/if}>
+<div class="xo-blockcontent"><{$block.content}></div>
+<{/if}>

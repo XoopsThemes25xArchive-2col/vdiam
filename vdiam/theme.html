@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<{$xoops_langcode}>" lang="<{$xoops_langcode}>">
+<head>
+<!-- Auteur info / pour utiliser ce theme vous ne devez pas enlever ces info merci
+Auteur & Code du Theme : Venom
+Adresse du site de l'auteur : http://lexode.info/mods/index.php
+-->
+
+<!-- theme name -->
+	<{assign var=theme_name value=$xoTheme->folderName}>
+<!-- directory html files -->
+	<{assign var=theme_name value=$xoTheme->folderName|cat:'/xotpl'}>
+<!-- title and meta -->
+	<title><{if $xoops_pagetitle !=''}><{$xoops_pagetitle}> : <{/if}><{$xoops_sitename}></title>
+	<meta http-equiv="content-type" content="text/html; charset=<{$xoops_charset}>" />	
+	<meta name="robots" content="<{$xoops_meta_robots}>" />
+	<meta name="keywords" content="<{$xoops_meta_keywords}>" />
+	<meta name="description" content="<{$xoops_meta_description}>" />
+	<meta name="rating" content="<{$xoops_meta_rating}>" />
+	<meta name="author" content="<{$xoops_meta_author}>" />
+	<meta name="copyright" content="<{$xoops_meta_copyright}>" />
+	<meta name="generator" content="XOOPS" />
+	
+<!-- Force MSIE sans le  javascript supporté à prendre le thème default. non conforme aux standards mais fonctionnel  -->
+<{if $isMsie}>
+	<noscript>
+	<meta http-equiv="refresh" content="0; url=<{xoAppUrl . xoops_theme_select=default}>" />
+	</noscript>
+<{/if}>
+
+<!-- rss -->
+<link rel="alternate" type="application/rss+xml" title="<{$smarty.const.THEME_RSS}>" href="<{xoAppUrl backend.php}>" />
+
+<!-- favicon -->
+	<link rel="shortcut icon" type="image/ico" href="<{xoImgUrl icons/favicon.ico}>" />
+	<link rel="icon" type="image/png" href="<{xoImgUrl icons/icon.png}>" />
+	
+<!-- Css du thème -->
+	<link rel="stylesheet" type="text/css" media="all" title="Style sheet" href="<{xoImgUrl css/style.css}>" />
+	<link rel="stylesheet" type="text/css" media="all" title="Style sheet" href="<{xoAppUrl style.css}>" />
+	
+	<{$xoops_module_header}>
+</head>
+<body id="<{$xoops_dirname}>" class="<{$xoops_langcode}>">
+<div id="xo-canvas">
+  <table cellspacing="0">
+    <tr id="xo-header" class="<{$xoops_dirname}>">
+      <td>
+		<a id="xo-site-title" href="<{xoAppUrl /}>"><{$xoops_sitename}></a>
+		<div id="xo-site-slogan"><{$xoops_slogan}></div>    
+<div id="xo-globalnav" class="x2-nl x2-navigation"><ul>
+		<li><a href="<{xoAppUrl}>" accesskey="a"  title="Accueil">ACCUEIL</a></li>
+		<li><a href="<{xoAppUrl modules/news/}>" accesskey="" title="Articles">ARTICLES</a></li>
+		<li><a href="<{xoAppUrl modules/wfdownloads/}>" accesskey="" title="Telechargement">SERVICES</a></li>
+		<!-- menu en mode enregistré -->
+		<li><a href="<{xoAppUrl modules/newbb/}>" accesskey=""  title="Forum">FORUM</a></li>
+        		<li><a href="<{xoAppUrl modules/wsproject/}>" accesskey=""  title="Project">PROJECT</a></li>
+	</ul>   
+    <div id="xo-searchbar">
+<form name="search" method="get" action="<{xoAppUrl /search.php}>" class="formlogin"><input type="text" id="query" name="query" class="keyword" value="" maxlength="255" tabindex="1" />
+<input type="hidden" name="action" id="action" value="results" />
+<input type="submit" value="Recherche" class="button" tabindex="2" />
+</form>
+</div></div>
+
+      </td>
+    </tr>
+  </table>
+<div id="xo-canvas-content" class="<{$xoops_dirname}>">
+  <table cellspacing="0">
+    <tr>
+      <td id="xo-canvas-leftcolumn">
+        <!-- Start left blocks loop -->
+        <{foreach item=block from=$xoops_lblocks}>
+          <{include file="$theme_name/theme_blockleft.html"}>		  
+        <{/foreach}>
+        <!-- End left blocks loop -->
+
+      </td>
+
+      <td id="xo-topblocks">
+        <!-- Display center blocks if any -->
+        <{if $xoops_showcblock == 1}>
+        <table cellspacing="0">
+		<tr>
+			<td id="xo-topcenterblocks" colspan="2">
+			<!-- Start center-center blocks loop -->
+			<{foreach item=block from=$xoops_ccblocks}>
+				<{include file="$theme_name/theme_blockcenter_c.html"}>
+			<{/foreach}>
+			<!-- End center-center blocks loop -->
+			</td>
+		</tr>
+		<tr>
+			<td id="xo-topleftblocks">		
+			<!-- Start center-left blocks loop -->
+			<{foreach item=block from=$xoops_clblocks}>
+				<{include file="$theme_name/theme_blockcenter_l.html"}>
+			<{/foreach}>
+			<!-- End center-left blocks loop -->
+			</td>
+			<td id="xo-toprightblocks">		
+			<!-- Start center-right blocks loop -->
+			<{foreach item=block from=$xoops_crblocks}>
+				<{include file="$theme_name/theme_blockcenter_r.html"}>
+			<{/foreach}>
+			<!-- End center-right blocks loop -->
+			</td>
+		</tr>
+        </table>
+        <{/if}>
+        <!-- End display center blocks -->
+        <div id="xo-content"><{$xoops_contents}></div>
+		
+        <{if $xoBlocks.page_bottomleft or $xoBlocks.page_bottomright or $xoBlocks.page_bottomcenter}>
+        <table cellspacing="0">
+        <{if $xoBlocks.page_bottomcenter}>
+		<tr><td id="xo-bottomcenterblocks" colspan="2">
+			<{foreach from=$xoBlocks.page_bottomcenter item=block}>
+			<{include file="$theme_name/theme_blockcenter_c.html"}><{/foreach}>
+			</td>
+		</tr>
+		<{/if}>
+		<{if $xoBlocks.page_bottomleft or $xoBlocks.page_bottomright}>
+		<tr>
+			<td id="xo-bottomleftblocks">
+				<{foreach from=$xoBlocks.page_bottomleft item=block}>
+				<{include file="$theme_name/theme_blockcenter_l.html"}><{/foreach}>
+			</td>
+			<td id="xo-bottomrightblocks">
+				<{foreach from=$xoBlocks.page_bottomright item=block}>
+				<{include file="$theme_name/theme_blockcenter_r.html"}><{/foreach}>
+			</td>
+		</tr>
+        <{/if}>
+        </table>
+        <{/if}>
+      </td>
+    </tr>
+  </table>
+</div>
+  <table cellspacing="0">
+    <tr id="xo-footer">
+      <td> 
+<!-- infos sur le designer vous n' êtes pas autorisé a supprimer ce commentaire -->
+<div class="design"><a href="http://lexode.info/mods" title="Mods Venom">Design by Venom</a></div>
+<!-- footer xoops -->
+<div class="copyright"><{$xoops_footer}></div></td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>
